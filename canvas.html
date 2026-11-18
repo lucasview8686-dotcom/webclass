@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f1ea;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      gap: 20px;
+    }
+
+    /* 2x2 方框網格容器 */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      width: 100%;
+      max-width: 720px;
+      aspect-ratio: 1 / 1;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    /* 單個方框共用樣式 */
+    .card {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    /* 各方框獨立配色 */
+    .card-1 {
+      background-color: #E3B594;
+      color: #6B3E2B;
+    }
+
+    .card-2 {
+      background-color: #2A4642;
+      color: #E8D5B5;
+    }
+
+    .card-3 {
+      background-color: #D87F6A;
+      color: #693326;
+    }
+
+    .card-4 {
+      background-color: #EBD8B7;
+      color: #2A4642;
+    }
+
+    svg {
+      width: 75%;
+      height: 75%;
+      overflow: visible;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 四個切換按鈕 -->
+  <div class="controls">
+    <button onclick="showOnly(1)">01</button>
+    <button onclick="showOnly(2)">02</button>
+    <button onclick="showOnly(3)">03</button>
+    <button onclick="showOnly(4)">04</button>
+  </div>
+
+  <div class="grid-container">
+    <!-- 01 / HALF CIRCLE / 180° -->
+    <div class="card card-1">
+      <svg viewBox="0 0 200 200">
+        <path d="M 15 110 A 85 85 0 0 1 185 110 Z" fill="#B04B36" />
+        <line x1="15" y1="126" x2="185" y2="126" stroke="#B04B36" stroke-width="3" />
+      </svg>
+    </div>
+
+    <!-- 02 / QUARTER SECTORS / 90° -->
+    <div class="card card-2">
+      <svg viewBox="0 0 200 200">
+        <path d="M 20 20 L 155 20 A 135 135 0 0 1 20 155 Z" fill="#F2D29B" />
+        <path d="M 165 165 L 110 165 A 55 55 0 0 1 165 110 Z" fill="#DF8A6F" />
+      </svg>
+    </div>
+
+    <!-- 03 / THREE QUARTERS / 270° -->
+    <div class="card card-3">
+      <svg viewBox="0 0 200 200">
+        <path d="M 95 105 L 175 105 A 80 80 0 1 1 95 25 Z" fill="#F5E8D5" />
+        <path d="M 110 90 L 110 35 A 55 55 0 0 1 165 90 Z" fill="#7C3427" />
+      </svg>
+    </div>
+
+    <!-- 04 / OPEN ARCS / 120° -->
+    <div class="card card-4">
+      <svg viewBox="0 0 200 200">
+        <path d="M 26.4 112.5 A 85 85 0 0 1 173.6 112.5" fill="none" stroke="#2A4642" stroke-width="15" />
+        <path d="M 55 129 A 52 52 0 0 1 145 129" fill="none" stroke="#BC563E" stroke-width="11" />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    function showOnly(num) {
+      const cards = document.querySelectorAll('.card');
+
+      // 使用 visibility 隱藏另外三格，保留原本的四分之一位置與大小
+      cards.forEach((card, index) => {
+        card.style.visibility = (index + 1 === num) ? 'visible' : 'hidden';
+      });
+    }
+  </script>
+
+</body>
+</html>
